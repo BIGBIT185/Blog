@@ -1,5 +1,7 @@
 # 刘成魁的个人博客
 
+[访问博客](https://bigbit185.github.io/Blog/)
+
 以软件工程、AI 应用与机器人研究为主题的中文个人博客。纯静态 HTML、CSS 与 JavaScript，无需安装依赖或构建，可以直接部署到 GitHub Pages。
 
 ## 页面内容
@@ -16,7 +18,7 @@
 
 ## 部署到 GitHub Pages
 
-1. 本站仓库为 `BIGBIT185/Blog`。打开 https://github.com/BIGBIT185/Blog/settings/pages 配置发布源。GitHub Free 需要公开仓库才能使用 Pages；保留现有仓库权限，按账户条件启用。
+1. 本站使用公开仓库 `BIGBIT185/Blog`，已配置 GitHub Pages 从 `main` 分支根目录发布。发布设置位于 https://github.com/BIGBIT185/Blog/settings/pages 。
 2. 将本文件夹的内容上传到仓库根目录，保留 `articles` 目录结构。
 3. 在仓库 **Settings → Pages** 中选择 **Deploy from a branch**，分支选择 **main**，目录选择 **/(root)**，保存。
 4. 等待 GitHub Pages 发布，打开 Pages 设置中显示的正式链接。
