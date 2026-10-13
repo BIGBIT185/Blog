@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="从几何、语义到区域中心先验，梳理多传感器可通行地图的构建思路。"><meta name="theme-color" content="#f7f7ef"><title>机器人如何判断脚下的路能不能走？ · 刘成魁</title><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css"><script src="../main.js" defer></script></head>
+<body><a class="skip-link" href="#article">跳到正文</a><header class="site-header wrap"><a class="brand" href="../index.html" aria-label="刘成魁的博客首页"><span class="brand-mark">ck<span>·</span></span><span>刘成魁<span class="brand-sub">个人博客 / FIELD NOTES</span></span></a><nav aria-label="主导航"><a href="../index.html#notes">文字</a><a href="../index.html#projects">项目</a><a href="../index.html#about">关于</a><button id="theme-toggle" class="theme-toggle" aria-label="切换到深色主题" title="切换主题">◐</button></nav></header>
+<main class="article-shell" id="article"><a class="article-back" href="../index.html#notes">← 返回全部笔记</a><article><header class="article-header"><div class="eyebrow">机器人感知 / 毕业研究笔记</div><h1>机器人如何判断脚下的路能不能走？</h1><p class="article-deck">从几何、语义到区域中心先验，梳理多传感器可通行地图的构建思路。</p><p class="article-provenance">刘成魁 · 根据毕业论文研究定位与中期报告整理。本文介绍方法思路，不报告未经核验的实验指标。</p></header><div class="article-body">
+<h2>把环境变成机器人能理解的地图</h2>
+<p>移动机器人面对的环境，并不总是一块平整的地面。道路、草地、碎石和障碍物可能交错出现。导航系统除了知道目标在哪里，还需要判断：哪些位置可以通过，哪些区域需要谨慎处理。</p>
+<p>我的毕业研究围绕多传感器融合的可通行性地图展开。它将点云、图像与位姿信息组织起来，为地图中的位置建立可通行概率表示，让后续路径规划拥有更丰富的环境依据。</p>
+<h2>为什么需要三种不同的信息？</h2>
+<p>第一类是几何信息。高程地图描述地面的高度变化，坡度、粗糙度等特征能够帮助识别不平整区域。但几何相近的地面，也可能具有不同的通行风险。</p>
+<p>第二类是语义信息。图像语义分割提供道路、草地等地表类别，并将这些信息映射到空间地图中。几何回答“地面是什么形状”，语义补充“这是什么地面”。</p>
+<p>第三类是区域中心先验。对语义区域内部的栅格计算到边界的距离，并在区域内归一化，可以得到区域中心地图。它为靠近边界的位置保留更谨慎的权重，表达区域内部和边缘之间的结构差异。</p>
+<div class="article-diagram" role="img" aria-label="几何信息、语义信息、区域中心先验经过条件融合，生成可通行概率地图"><strong>几何 + 语义 + 区域中心</strong><span>→</span><strong>条件融合</strong><span>→</span><strong>可通行概率地图</strong></div>
+<h2>融合之前，先判断信息是否可靠</h2>
+<p>研究定位材料中的规则链采用语义条件融合思路：当语义明确表示不可通行时，抑制该位置的通行概率；当语义未知时，依靠几何信息与区域中心先验；当语义有效时，再综合三类信息。</p>
+<p>这种处理的重点，是让不同信息在合适的条件下发挥作用。未知语义不应被当作确定结论，而明确的危险类别也不应被其他信息轻易抵消。</p>
+<h2>从规则地图，到学习模型</h2>
+<p>规则链还承担了另一个角色：生成训练标签。研究框架首先利用规则生成的可通行地图构建自动标注数据，再让学习模型直接从原始点云、RGB 图像以及相机参数中预测局部可通行地图。</p>
+<p>这里需要区分两条链路：规则链以可解释的处理过程生成监督信息；学习链面向原始传感器输入，学习观测与地图之间的映射。规则标签本身存在局限，学习模型也需要通过真实场景的实验来验证。</p>
+<h2>值得继续追问的问题</h2>
+<ul><li>传感器与地图如何对齐，才能减少投影误差？</li><li>规则生成的标签存在偏差时，学习模型会继承哪些偏差？</li><li>地图预测精度、推理耗时与导航安全，应该怎样共同评估？</li></ul>
+<p>这个课题让我把感知、地图表示与学习方法放在同一个系统里思考。构建一张有用的地图，需要理解每一层信息从哪里来，也需要清楚它能够说明什么。</p>
+</div></article><div class="article-ending"><span>把做过的事，写成可以分享的经验。</span><a href="../index.html#projects">继续探索项目 ↗</a></div></main><footer class="site-footer wrap"><span>© 2026 刘成魁 · 记录、构建、探索。</span><a href="#">回到顶部 ↑</a></footer></body></html>

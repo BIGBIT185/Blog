@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="连接大语言模型、语音服务与微信小程序，搭建德语学习应用的后端。"><meta name="theme-color" content="#f7f7ef"><title>DeutschPartner：让 AI 开口说德语 · 刘成魁</title><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css"><script src="../main.js" defer></script></head>
+<body><a class="skip-link" href="#article">跳到正文</a><header class="site-header wrap"><a class="brand" href="../index.html" aria-label="刘成魁的博客首页"><span class="brand-mark">ck<span>·</span></span><span>刘成魁<span class="brand-sub">个人博客 / FIELD NOTES</span></span></a><nav aria-label="主导航"><a href="../index.html#notes">文字</a><a href="../index.html#projects">项目</a><a href="../index.html#about">关于</a><button id="theme-toggle" class="theme-toggle" aria-label="切换到深色主题" title="切换主题">◐</button></nav></header>
+<main class="article-shell" id="article"><a class="article-back" href="../index.html#notes">← 返回全部笔记</a><article><header class="article-header"><div class="eyebrow">AI 应用 / 项目开发笔记</div><h1>DeutschPartner：让 AI 开口说德语</h1><p class="article-deck">连接大语言模型、语音服务与微信小程序，搭建德语学习应用的后端。</p><p class="article-provenance">刘成魁 · 根据个人简历中的项目经历整理；项目时间为 2024 年 7–9 月。</p></header><div class="article-body">
+<h2>从一个学习场景出发</h2>
+<p>DeutschPartner 是一个生成式 AI 驱动的德语外教小程序项目。语言学习不只有阅读文字，还涉及开口表达、听懂反馈，以及在连续对话中理解语境。我参与的工作主要是为微信小程序提供后端接口，并连接模型与语音服务。</p>
+<h2>把对话能力接入应用</h2>
+<p>项目使用 Python 与 Flask 组织后端接口，集成大语言模型 API，并通过 Azure 的 STT（语音识别）与 TTS（语音合成）服务连接语音输入和输出。语音识别将用户的表达转成文本，模型生成回复后，再由语音合成提供可播放的内容。</p>
+<div class="article-diagram" role="img" aria-label="语音输入通过语音识别转换为文本，模型回复再通过语音合成变为语音"><strong>语音输入</strong><span>→</span><strong>STT</strong><span>→</span><strong>模型对话</strong><span>→</span><strong>TTS</strong></div>
+<p>对小程序而言，这些能力需要通过清晰的接口提供。后端承担服务之间的衔接，让前端可以围绕学习与对话来组织交互。</p>
+<h2>让一次对话拥有上下文</h2>
+<p>项目使用 MySQL 管理用户、聊天记录与 Prompt，并建立德语词库。聊天记录承载对话上下文，Prompt 管理为模型调用提供可维护的配置，词库则为语言学习内容提供基础。</p>
+<p>这些部分共同组成了应用的数据层。除了模型本身，如何保存和使用数据，也是学习体验能否连续的重要环节。</p>
+<h2>从接口开发到部署</h2>
+<p>系统部署在腾讯云服务器上，在 Linux 环境中运行。这个项目覆盖了接口开发、数据库组织、外部服务集成与云端部署，让一个模型调用逐步成为可以被小程序使用的应用服务。</p>
+<h2>项目带来的思考</h2>
+<p>AI 应用的工程工作往往发生在模型周围。语音、数据和前端交互之间的连接，会直接影响应用体验。后续完善这类系统时，服务响应时间、异常处理、对话记录管理与调用成本，都是需要继续关注的问题。</p>
+<p>对我而言，DeutschPartner 是一次把后端开发与 AI 能力放进真实学习场景的实践，也让我更关注完整应用的构建过程。</p>
+</div></article><div class="article-ending"><span>把做过的事，写成可以分享的经验。</span><a href="../index.html#projects">继续探索项目 ↗</a></div></main><footer class="site-footer wrap"><span>© 2026 刘成魁 · 记录、构建、探索。</span><a href="#">回到顶部 ↑</a></footer></body></html>

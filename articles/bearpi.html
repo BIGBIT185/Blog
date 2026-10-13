@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="在 BearPi 上打通硬件驱动、JS API 与 2048 界面，让代码有了触感。"><meta name="theme-color" content="#f7f7ef"><title>从一颗按钮开始，做一只自己的游戏手柄 · 刘成魁</title><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css"><script src="../main.js" defer></script></head>
+<body><a class="skip-link" href="#article">跳到正文</a><header class="site-header wrap"><a class="brand" href="../index.html" aria-label="刘成魁的博客首页"><span class="brand-mark">ck<span>·</span></span><span>刘成魁<span class="brand-sub">个人博客 / FIELD NOTES</span></span></a><nav aria-label="主导航"><a href="../index.html#notes">文字</a><a href="../index.html#projects">项目</a><a href="../index.html#about">关于</a><button id="theme-toggle" class="theme-toggle" aria-label="切换到深色主题" title="切换主题">◐</button></nav></header>
+<main class="article-shell" id="article"><a class="article-back" href="../index.html#notes">← 返回全部笔记</a><article><header class="article-header"><div class="eyebrow">嵌入式开发 / 硬件实践笔记</div><h1>从一颗按钮开始，做一只自己的游戏手柄</h1><p class="article-deck">在 BearPi 上打通硬件驱动、JS API 与 2048 界面，让代码有了触感。</p><p class="article-provenance">刘成魁 · 根据个人简历中的项目经历整理；实践时间为 2024 年 6 月。</p></header><div class="article-body">
+<h2>一个看得见、摸得着的小系统</h2>
+<p>在 BearPi-HM Micro 开发板上，我设计并实现了一只用于控制 2048 小游戏的手柄。硬件由六个按钮和七个 LED 灯组成，按钮负责输入，灯光提供视觉反馈。</p>
+<p>这项实践的重点，是把硬件信号、系统接口与游戏界面连接起来：按下按钮之后，软件需要读到状态，游戏需要作出响应，反馈还要回到用户面前。</p>
+<h2>驱动、接口与界面，各自负责什么？</h2>
+<p>底层使用 HarmonyOS 的 HDF 框架编写手柄驱动，处理按钮输入和 LED 控制。驱动负责对接硬件，将具体的设备操作组织成可调用的能力。</p>
+<p>中间层通过扩展 JS API 定义游戏服务接口，让前端能够读取按钮状态并控制 LED。接口在界面与驱动之间建立边界，减少上层对硬件细节的直接依赖。</p>
+<p>前端使用 HML、CSS 与 JavaScript 实现 2048 游戏界面，处理游戏展示和操作反馈。硬件输入通过接口影响游戏状态，再反映到界面上。</p>
+<div class="article-diagram" role="img" aria-label="按钮与 LED 由 HDF 驱动连接，通过 JS API 与 2048 游戏界面交互"><strong>按钮 / LED</strong><span>↔</span><strong>HDF 驱动</strong><span>↔</span><strong>JS API</strong><span>↔</span><strong>2048 界面</strong></div>
+<h2>沿着一次按键追踪整个链路</h2>
+<p>把按键视为一条完整链路，有助于理解系统中每个部分的职责。出现问题时，可以分别检查硬件状态是否被读取、接口是否正确传递信息，以及界面是否更新，逐层缩小排查范围。</p>
+<p>这种分层思路同样适用于其他嵌入式项目：先明确输入和输出，再检查每一层如何传递与处理状态。</p>
+<h2>让软件走出屏幕</h2>
+<p>这个项目加深了我对嵌入式系统、驱动编写与前后端集成的理解。一个小小的游戏手柄，可以让原本分散的知识在同一次操作里协同工作。</p>
+<p>我也做过 STM32 光立方和基于树莓派的空调遥控装置。亲手搭建这些小系统，是我理解软件如何影响真实世界的一种方式。</p>
+</div></article><div class="article-ending"><span>把做过的事，写成可以分享的经验。</span><a href="../index.html#projects">继续探索项目 ↗</a></div></main><footer class="site-footer wrap"><span>© 2026 刘成魁 · 记录、构建、探索。</span><a href="#">回到顶部 ↑</a></footer></body></html>

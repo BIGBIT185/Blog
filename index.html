@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="刘成魁的个人博客。记录软件开发、人工智能应用与移动机器人研究中的项目和思考。">
+  <meta name="theme-color" content="#f7f7ef">
+  <title>刘成魁 · 在代码与世界之间</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="main.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">跳到正文</a>
+<header class="site-header wrap">
+  <a class="brand" href="./" aria-label="刘成魁的博客首页"><span class="brand-mark">ck<span>·</span></span><span>刘成魁<span class="brand-sub">个人博客 / FIELD NOTES</span></span></a>
+  <nav aria-label="主导航"><a href="#notes">文字</a><a href="#projects">项目</a><a href="#about">关于</a><button id="theme-toggle" class="theme-toggle" aria-label="切换到深色主题" title="切换主题">◐</button></nav>
+</header>
+<main id="main">
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <div class="hero-copy"><div class="eyebrow"><span class="status-dot"></span> HELLO, WORLD. I'M CHENGKUI.</div>
+      <h1 id="hero-title">在代码与<br>世界之间<span class="accent">。</span></h1>
+      <p class="hero-intro">你好，我是刘成魁。<br>从软件工程出发，探索 AI 应用与机器人感知。<br>在这里，记录把想法变成现实的过程。</p>
+      <div class="hero-actions"><a class="button" href="#notes">阅读我的笔记 <span>↗</span></a><a class="quiet-link" href="#about">认识一下 <span>→</span></a></div>
+      <div class="hero-tags"><span>软件工程</span><span>AI 应用</span><span>机器人感知</span></div>
+    </div>
+    <div class="field-art" role="img" aria-label="可通行性研究主题插画：地形等高线与一条穿过地形的探索路径。为概念示意，并非实验结果。">
+      <div class="art-top"><span>EXPLORING THE POSSIBLE</span><span>FIG. 01</span></div>
+      <svg class="terrain" viewBox="0 0 520 430" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><pattern id="grid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="currentColor" stroke-opacity=".09"/></pattern><clipPath id="terrain-clip"><rect width="520" height="430" rx="4"/></clipPath></defs>
+        <g clip-path="url(#terrain-clip)"><rect width="520" height="430" fill="url(#grid)"/>
+        <g class="contours" fill="none" stroke="currentColor" stroke-width="1.2">
+        <path d="M-60 254C-32 115 113-54 238-19S349 80 440 80S560 133 585 246S481 473 332 472S104 471 19 395S-88 385-60 254Z"/>
+        <path d="M-33 258C-8 129 114-30 232 0S335 106 428 100S540 146 557 249S461 451 328 450S122 450 40 381S-58 380-33 258Z"/>
+        <path d="M-6 258C19 143 114-5 226 20S321 129 416 121S518 164 531 251S444 429 324 428S137 430 61 367S-28 366-6 258Z"/>
+        <path d="M22 262C43 157 116 19 220 42S310 150 404 142S494 180 502 254S426 407 321 408S150 410 81 353S1 354 22 262Z"/>
+        <path d="M50 264C68 176 119 44 218 67S295 174 393 164S470 197 474 258S411 386 317 387S167 390 104 339S30 338 50 264Z"/>
+        <path d="M77 266C95 191 121 72 214 89S281 194 379 187S446 215 447 262S393 365 313 366S184 373 125 326S58 323 77 266Z"/>
+        <path d="M104 266C119 209 128 98 212 112S274 220 366 209S420 230 420 269S375 343 309 345S202 357 148 313S90 308 104 266Z"/>
+        <path d="M132 266C147 225 138 125 213 136S255 238 341 235S395 250 391 280S350 324 297 323S221 338 175 301S116 295 132 266Z"/>
+        <path d="M158 265C175 231 154 153 210 160S243 254 316 256S367 273 359 289S314 300 280 300S231 316 201 290S143 290 158 265Z"/>
+        <path d="M185 261C199 234 177 181 212 185S226 270 265 277S270 295 242 285S174 283 185 261Z"/>
+        <path d="M210 226C215 216 219 226 220 240S215 261 210 251S204 237 210 226Z"/>
+        </g>
+        <path d="M45 350C116 369 146 346 175 312S253 268 289 236S322 174 376 156S425 120 457 75" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="5 6"/>
+        <g fill="var(--art-bg)" stroke="var(--accent)" stroke-width="2"><circle cx="45" cy="350" r="5"/><circle cx="457" cy="75" r="6"/></g>
+        <circle cx="289" cy="236" r="22" fill="var(--accent)" fill-opacity=".12"/><circle cx="289" cy="236" r="6" fill="var(--accent)"/>
+        <g fill="currentColor" font-family="monospace" font-size="10"><text x="40" y="375">START HERE</text><text x="341" y="65">WHAT'S NEXT?</text><text x="312" y="233">KEEP EXPLORING</text></g>
+        <path d="M28 35h16m-8-8v16M480 394h16m-8-8v16" stroke="currentColor" stroke-opacity=".5"/>
+        </g>
+      </svg>
+      <div class="art-bottom"><span>感知 · 理解 · 实现</span><span>CONCEPT MAP / 概念示意</span></div>
+      <span class="art-note">每一步探索，都留下自己的坐标。</span>
+    </div>
+  </section>
+  <div class="intro-strip wrap"><span>从屏幕里的想法，到真实世界的反馈。</span><span class="mono">PYTHON / C++ / ROBOTICS / AI</span></div>
+  <section id="notes" class="section wrap" aria-labelledby="notes-title">
+    <div class="section-head"><div><div class="eyebrow">01 / FIELD NOTES</div><h2 id="notes-title">思考与记录<span class="count">03</span></h2></div><p>把做过的事，写成可以分享的经验。</p></div>
+    <div class="note-controls" aria-label="笔记筛选"><div class="filters" role="group" aria-label="按主题筛选"><button class="filter active" data-filter="all" aria-pressed="true">全部</button><button class="filter" data-filter="robotics" aria-pressed="false">机器人</button><button class="filter" data-filter="ai" aria-pressed="false">AI 应用</button><button class="filter" data-filter="embedded" aria-pressed="false">嵌入式</button></div><label class="search"><span aria-hidden="true">⌕</span><input type="search" id="note-search" placeholder="搜索笔记" aria-label="搜索笔记"></label></div>
+    <div class="notes-grid" id="notes-grid">
+      <a class="note-card" data-category="robotics" href="articles/traversability.html"><div class="note-art map-mini"><svg viewBox="0 0 300 160" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.3"><path d="M-20 135Q60-30 165 51T335 15M-20 149Q60-16 165 65T335 29M-20 163Q60-2 165 79T335 43M-20 177Q60 12 165 93T335 57M-20 191Q60 26 165 107T335 71M-20 205Q60 40 165 121T335 85M-20 219Q60 54 165 135T335 99"/></g><path d="M42 133L86 94L129 108L171 65L229 57L261 25" fill="none" stroke="var(--accent)" stroke-width="2" stroke-dasharray="4 5"/><circle cx="171" cy="65" r="5" fill="var(--accent)"/></svg><span>PERCEPTION → TRAVERSABILITY</span></div><div class="note-body"><div class="note-meta">机器人感知 <span>毕业研究笔记</span></div><h3>机器人如何判断<br>脚下的路能不能走？</h3><p>从几何、语义到区域中心先验，梳理多传感器可通行地图的构建思路。</p><div class="note-bottom"><span>研究思路 · 约 4 分钟</span><span class="arrow">↗</span></div></div></a>
+      <a class="note-card" data-category="ai" href="articles/deutschpartner.html"><div class="note-art ai-mini"><div class="bubble">Hallo! Wie geht's?</div><div class="bubble reply">让对话，成为学习的一部分。<i>▥ ▥ ▥ ▥ ▥ ▥ ▥</i></div><span>DEUTSCHPARTNER / AI + LANGUAGE</span></div><div class="note-body"><div class="note-meta">AI 应用 <span>项目开发笔记</span></div><h3>DeutschPartner：<br>让 AI 开口说德语</h3><p>连接大语言模型、语音服务与小程序，搭建一个德语学习应用的后端。</p><div class="note-bottom"><span>工程实践 · 约 3 分钟</span><span class="arrow">↗</span></div></div></a>
+      <a class="note-card" data-category="embedded" href="articles/bearpi.html"><div class="note-art hardware-mini"><svg viewBox="0 0 300 160" aria-hidden="true"><rect x="75" y="33" width="150" height="94" rx="12" fill="none" stroke="currentColor" stroke-width="2"/><path d="M96 80h32m-16-16v32" stroke="currentColor" stroke-width="7"/><circle cx="190" cy="69" r="7" fill="var(--accent)"/><circle cx="207" cy="87" r="7" fill="currentColor" opacity=".5"/><g fill="currentColor" opacity=".5"><circle cx="147" cy="113" r="2"/><circle cx="155" cy="113" r="2"/><circle cx="163" cy="113" r="2"/></g><path d="M150 33V14h85m-85 113v18H58" stroke="currentColor" fill="none" stroke-dasharray="3 4"/></svg><span>BEARPI / HARMONYOS / 2048</span></div><div class="note-body"><div class="note-meta">嵌入式开发 <span>硬件实践笔记</span></div><h3>从一颗按钮开始，<br>做一只自己的游戏手柄</h3><p>在 BearPi 上打通硬件驱动、JS API 与 2048 界面，让代码有了触感。</p><div class="note-bottom"><span>动手实践 · 约 3 分钟</span><span class="arrow">↗</span></div></div></a>
+    </div><p class="empty-state" id="empty-state" hidden>暂时没有匹配的笔记，试试其他关键词或分类。</p><span class="sr-only" id="filter-status" role="status" aria-live="polite"></span>
+  </section>
+  <section id="projects" class="projects-section"><div class="wrap section"><div class="section-head"><div><div class="eyebrow">02 / SELECTED WORK</div><h2 id="projects-title">让想法落地</h2></div><p>从应用后端到机器人，持续拓展技术的边界。</p></div>
+    <div class="project-list">
+      <a class="project-row" href="articles/traversability.html"><span class="project-number">01</span><div><div class="project-kicker">毕业研究 / ROBOTICS</div><h3>多传感器融合可通行性地图</h3><p>融合几何、语义与区域中心先验，探索规则标签与端到端预测的衔接。</p><div class="tags"><span>Python</span><span>多传感器融合</span><span>弱监督学习</span></div></div><span class="project-arrow">↗</span></a>
+      <a class="project-row" href="articles/deutschpartner.html"><span class="project-number">02</span><div><div class="project-kicker">2024 / AI APPLICATION</div><h3>DeutschPartner 德语伙伴</h3><p>面向微信小程序的 AI 德语外教后端，集成对话、语音识别与语音合成。</p><div class="tags"><span>Flask</span><span>MySQL</span><span>Azure STT / TTS</span></div></div><span class="project-arrow">↗</span></a>
+      <a class="project-row" href="articles/originalbot.html"><span class="project-number">03</span><div><div class="project-kicker">2024 / COMPUTER VISION</div><h3>OriginalBot 视觉巡线</h3><p>从 OpenCV 与 PID 到 ResNet18 路线识别，实践机器人的视觉感知与控制。</p><div class="tags"><span>OpenCV</span><span>PyTorch</span><span>RDK X3</span></div></div><span class="project-arrow">↗</span></a>
+      <a class="project-row" href="articles/bearpi.html"><span class="project-number">04</span><div><div class="project-kicker">2024 / EMBEDDED SYSTEMS</div><h3>BearPi 自制游戏手柄</h3><p>六颗按钮、七颗 LED，将 HarmonyOS 驱动与小游戏连成一个完整系统。</p><div class="tags"><span>HarmonyOS</span><span>C / C++</span><span>HDF</span></div></div><span class="project-arrow">↗</span></a>
+    </div>
+  </div></section>
+  <section id="about" class="section wrap about-section"><div class="about-heading"><div class="eyebrow">03 / A LITTLE ABOUT ME</div><h2>保持好奇，<br>认真动手<span class="accent">。</span></h2><div class="signature">Chengkui Liu <span>↗</span></div></div><div class="about-content"><p class="about-lead">我是刘成魁，学习软件工程，<br>也喜欢走到软件与现实世界交汇的地方。</p><p>在华东师范大学的软件工程学习经历中，我接触了后端开发、计算机视觉与嵌入式系统。做过 AI 德语学习小程序的后端，也尝试过机器人视觉巡线、校园卡检测和自制游戏手柄。</p><p>我喜欢亲手搭建东西：从 STM32 光立方，到基于树莓派的物联网空调遥控装置。这里会留下项目中的方法、问题和思考，让每一次实践都有迹可循。</p><div class="education"><span class="mono">EDUCATION</span><strong>华东师范大学</strong><span>软件工程 · 嵌入式方向 · 2022 级本科</span></div><div class="honors"><h3>一些成长的印记</h3><ul><li><span>软件设计创新赛 · 华东赛区二等奖</span><small>第十八届全国大学生软件创新大赛</small></li><li><span>大语言模型创新应用开发赛道 · 二等奖</span><small>第二届全民数字素养与人工智能创新应用大赛</small></li><li><span>本科优秀学生奖学金</span><small>2024–2025 学年二等奖 · 2022–2024 学年三等奖</small></li></ul></div></div></section>
+  <section class="closing wrap"><span class="eyebrow">THE EXPLORATION CONTINUES</span><p>下一个想法，<br>也许就从一次交流开始。</p><a class="quiet-link" href="https://github.com/BIGBIT185" target="_blank" rel="noopener noreferrer">在 GitHub 找到我 <span>↗</span></a></section>
+</main>
+<footer class="site-footer wrap"><span>© 2026 刘成魁 <span class="footer-dot">·</span> 记录、构建、探索。</span><a href="#">回到顶部 ↑</a></footer>
+</body>
+</html>

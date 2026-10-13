@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="以传统视觉与深度学习两条路径，实践机器人视觉巡线。"><meta name="theme-color" content="#f7f7ef"><title>OriginalBot：从看见路线到沿线行驶 · 刘成魁</title><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css"><script src="../main.js" defer></script></head>
+<body><a class="skip-link" href="#article">跳到正文</a><header class="site-header wrap"><a class="brand" href="../index.html" aria-label="刘成魁的博客首页"><span class="brand-mark">ck<span>·</span></span><span>刘成魁<span class="brand-sub">个人博客 / FIELD NOTES</span></span></a><nav aria-label="主导航"><a href="../index.html#notes">文字</a><a href="../index.html#projects">项目</a><a href="../index.html#about">关于</a><button id="theme-toggle" class="theme-toggle" aria-label="切换到深色主题" title="切换主题">◐</button></nav></header>
+<main class="article-shell" id="article"><a class="article-back" href="../index.html#notes">← 返回全部笔记</a><article><header class="article-header"><div class="eyebrow">计算机视觉 / 项目介绍</div><h1>OriginalBot：从看见路线到沿线行驶</h1><p class="article-deck">以传统视觉与深度学习两条路径，实践机器人视觉巡线。</p><p class="article-provenance">刘成魁 · 根据个人简历中的项目经历整理；实践时间为 2024 年 5 月。</p></header><div class="article-body">
+<h2>把图像转换成行进方向</h2>
+<p>OriginalBot 视觉巡线项目的目标，是利用摄像头采集的地面图像识别路线，并据此调整机器人的行进方向。这个任务把图像处理与运动控制连接在了一起。</p>
+<h2>第一条路径：OpenCV 与 PID</h2>
+<p>传统视觉方案通过 OpenCV 对摄像头图像进行处理，识别路径边缘，再结合 PID 控制算法调整机器人的方向。感知结果为控制提供依据，控制输出则影响下一时刻机器人看到的画面。</p>
+<div class="article-diagram" role="img" aria-label="摄像头图像经过路径识别和 PID 控制，转化为机器人方向调整"><strong>摄像头图像</strong><span>→</span><strong>路径识别</strong><span>→</span><strong>PID 控制</strong><span>→</span><strong>方向调整</strong></div>
+<h2>第二条路径：学习路线中心点</h2>
+<p>深度学习方案选用 ResNet18 作为主干网络，使用 PyTorch 训练路线中心点模型。这一路径将图像与路线位置之间的映射交给模型学习，与传统图像处理形成不同的实现思路。</p>
+<p>项目还进行了浮点模型到定点模型的转换，为后续在 RDK X3 上部署做准备。训练环境中的模型，需要经过适合目标设备的转换，才能继续完成端侧验证。</p>
+<h2>从单个模块到完整系统</h2>
+<p>视觉巡线需要同时关注路线识别和控制响应。识别结果的稳定性、处理延迟，以及运动过程中画面的变化，都值得在实际运行中观察。</p>
+<p>这项实践让我开始从系统的角度理解机器人：一个模型或一段控制算法，只有放回传感器、算力平台与执行机构组成的完整链路中，才能判断它是否合适。</p>
+</div></article><div class="article-ending"><span>把做过的事，写成可以分享的经验。</span><a href="../index.html#projects">继续探索项目 ↗</a></div></main><footer class="site-footer wrap"><span>© 2026 刘成魁 · 记录、构建、探索。</span><a href="#">回到顶部 ↑</a></footer></body></html>
