@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="连接空中建图、地面定位、可通行地图与局部控制，梳理协同导航的系统接口。"><meta name="theme-color" content="#f7f7ef"><title>空地协同：从全局先验到局部可通行性 · 刘成魁</title><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css"><script src="../main.js" defer></script></head>
+<body><a class="skip-link" href="#article">跳到正文</a><header class="site-header wrap"><a class="brand" href="../index.html" aria-label="刘成魁的博客首页"><span class="brand-mark">ck<span>·</span></span><span>刘成魁<span class="brand-sub">个人博客 / FIELD NOTES</span></span></a><nav aria-label="主导航"><a href="../index.html#notes">文字</a><a href="../index.html#projects">项目</a><a href="../index.html#about">关于</a><button id="theme-toggle" class="theme-toggle" aria-label="切换到深色主题" title="切换主题">◐</button></nav></header>
+<main class="article-shell" id="article"><a class="article-back" href="../index.html#notes">← 返回全部笔记</a><article><header class="article-header"><div class="eyebrow">机器人 / 系统方案与研究笔记</div><h1>空地协同：从全局先验到局部可通行性</h1><p class="article-deck">连接空中建图、地面定位、可通行地图与局部控制，梳理协同导航的系统接口。</p><p class="article-provenance">刘成魁 · 根据团队方案汇报、地图方法讨论与原型实现材料整理。系统方案与局部原型分开描述。</p></header><div class="article-body">
+<div class="article-status"><span>系统方案 / 局部原型</span><span>建图 · 定位 · 可通行性 · 规划</span></div>
+<h2>先看全局，再处理眼前的地面</h2>
+<p>空地协同项目材料描述了一个面向陌生环境的导航方案：无人机从空中构建全局点云，地面机器人在该地图中定位，并结合全局路径与自身传感器完成局部避障。空中视角提供先验，地面感知补充近处和盲区的信息。</p>
+<p>这篇笔记整理团队方案与相关原型，重点是系统各部分如何衔接。它并不代表整个空地闭环已完成实地验收。</p>
+<div class="article-diagram" role="img" aria-label="空中建图提供全局先验，经地面重定位与全局规划，再结合局部感知和控制"><strong>空中建图</strong><span>→</span><strong>地面重定位</strong><span>→</span><strong>全局规划</strong><span>→</span><strong>局部感知与控制</strong></div>
+<h2>全局部分：地图与跨视角定位</h2>
+<p>方案讨论了激光与视觉建图、全局点云滤波，以及地面局部点云和空中地图之间的匹配。跨视角定位是重要难点：空中与地面看到的结构不同，缺少合适初值时，局部配准也可能停在错误位置。</p>
+<p>因此，方案把候选位置检索、粗配准与精配准分开考虑，再由全局可通行地图支撑路径规划。全局路径需要进一步转换成局部目标，供地面感知与控制模块持续使用。</p>
+<h2>局部部分：从地图层到控制输入</h2>
+<p>相关实现材料包含 ROS1 GridMap 接口与 MPPI 局部规划原型。节点读取地图层、组织规划输入，并发布 <code>cmd_vel</code>。这让地图生成和车辆控制之间拥有可检查的接口。</p>
+<p>局部感知需要与全局先验保持坐标关系，也需要处理空地视角差异、未知区域与负障碍等问题。地图分辨率、更新频率和路径目标切换，都属于系统验证的一部分。</p>
+<h2>从区域中心，改成安全距离先验</h2>
+<p>新的方法讨论对早期“区域中心”表达作了细化：只在候选可通行区域内计算到禁行区、未知区和边界的距离。障碍物区域的中心，不应因为远离自身边界就得到高可通行值。</p>
+<p>方案先融合几何与语义信息得到基础判断，再用安全距离项进行风险抑制。它表达的是“已具备通行基础的位置，靠近障碍与边界时更谨慎”。</p>
+<div class="formula-block"><span>方案中的安全距离调制</span><strong>P_clear = clip(D / R, 0, 1)</strong><strong>P_rule = P_base × (1 − η + η × P_clear)</strong></div>
+<p>其中 D 是候选可通行区域内到风险边界的距离，R 是安全距离尺度，η 控制调制强度。禁行区与未知区单独处理；在这一方案中直接置零。参数示例用于说明设计，不代表已经完成场景标定。</p>
+<h2>地图生成与训练数据的衔接</h2>
+<p>研究材料还涉及 GOOSE 数据处理、GPU 持久滚动高程地图，以及通过规则地图生成监督信息的流程。复用已融合的地图状态，可以作为减少重复处理的工程方向；对应记录目前只描述小规模基准，不等同于完成全量构建。</p>
+<p>ORFD 数据对齐、多帧信息融合与辅助监督也出现在后续研究计划中。这些内容与本科可通行性课题相衔接，但应保留各阶段的输入定义、监督来源和验证边界。</p>
+<h2>把系统验证拆成可回答的问题</h2>
+<ul><li>空地地图之间的定位误差，如何影响规划？</li><li>几何、语义与安全距离先验，分别带来什么变化？</li><li>未知区与负障碍的处理，是否符合实际通行要求？</li><li>地图更新、局部目标与控制输出，是否能够稳定衔接？</li></ul>
+<p>空地协同需要把每个模块的输入、输出和不确定性说明白，再通过统一场景验证整条链路。</p>
+</div></article><div class="article-ending"><span>把做过的事，写成可以分享的经验。</span><a href="../index.html#projects">继续探索项目 ↗</a></div></main><footer class="site-footer wrap"><span>© 2026 刘成魁 · 记录、构建、探索。</span><a href="#">回到顶部 ↑</a></footer></body></html>

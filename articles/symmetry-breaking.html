@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="基于 BEVDet / DAL，探索等变结构的注入位置、约束强度与多模态检测之间的关系。"><meta name="theme-color" content="#f7f7ef"><title>对称破缺：在三维检测中保留等变先验 · 刘成魁</title><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css"><script src="../main.js" defer></script></head>
+<body><a class="skip-link" href="#article">跳到正文</a><header class="site-header wrap"><a class="brand" href="../index.html" aria-label="刘成魁的博客首页"><span class="brand-mark">ck<span>·</span></span><span>刘成魁<span class="brand-sub">个人博客 / FIELD NOTES</span></span></a><nav aria-label="主导航"><a href="../index.html#notes">文字</a><a href="../index.html#projects">项目</a><a href="../index.html#about">关于</a><button id="theme-toggle" class="theme-toggle" aria-label="切换到深色主题" title="切换主题">◐</button></nav></header>
+<main class="article-shell" id="article"><a class="article-back" href="../index.html#notes">← 返回全部笔记</a><article><header class="article-header"><div class="eyebrow">三维感知 / 研究实验笔记</div><h1>对称破缺：在三维检测中保留等变先验</h1><p class="article-deck">基于 BEVDet / DAL，探索等变结构的注入位置、约束强度与多模态检测之间的关系。</p><p class="article-provenance">刘成魁 · 根据网络架构、文献整理及 2026 年 7 月的实验交接记录整理。内容属于研究过程记录。</p></header><div class="article-body">
+<div class="article-status"><span>实验研究</span><span>BEVDet / DAL · 等变结构 · 消融实验</span></div>
+<h2>让场景变换与特征变换相对应</h2>
+<p>三维目标检测需要处理不同方向与视角下的场景。“对称破缺”这一研究方向，从 BEVDet / DAL 多模态检测框架出发，关注如何在网络中引入旋转等变结构，并研究这种结构约束在真实数据中的适用范围。</p>
+<p>等变性的直观含义是：输入按某种规则变换后，输出也以对应方式变换。例如在合适的 BEV 表示中旋转场景，目标位置与方向的预测应跟随场景变化。它约束的是变换之间的对应关系。</p>
+<h2>先理解原有数据链路</h2>
+<p>项目中的架构与数据流水线文档梳理了图像特征提取、视图变换、BEV 编码、LiDAR 特征与融合检测头。图像、点云和标注在增强过程中需要保持几何一致；场景旋转、目标朝向和多帧点云之间的关系，会影响结构改造的判断。</p>
+<div class="article-diagram" role="img" aria-label="图像与点云分别编码，进入 BEV 特征与融合模块，最后产生三维检测结果"><strong>图像 / 点云</strong><span>→</span><strong>各自编码</strong><span>→</span><strong>BEV 与融合</strong><span>→</span><strong>3D 检测</strong></div>
+<h2>严格等变，还是允许适度偏离？</h2>
+<p>文献笔记涉及局部点云结构、全局 BEV 群卷积，以及通过可学习偏置或变换扰动放松严格等变约束的思路。它们为研究提供了不同的出发点：保留结构先验，同时考虑真实观测中视角、遮挡和采样造成的不完全对称。</p>
+<p>这些方法来源于已有研究。这里的项目工作围绕既有检测基线开展理解、结构改造与对照实验，并不将参考论文的方法视为个人原创成果。</p>
+<h2>一次只改变一个关键位置</h2>
+<p>实验记录中有一组明确的设置：保持 Camera 与 LiDAR 主干为 DAL-Tiny 的普通结构，只在 dense fusion 中使用严格 C4 等变模块。C4 对应平面上以 90° 为步长的四种旋转。这个设置有助于把“融合模块引入约束”的影响单独观察出来。</p>
+<p>研究还涉及不同模块位置、严格或松弛约束，以及基线训练和微调策略的对比。记录这些差异，可以减少把训练方案变化误当作结构收益的可能。</p>
+<h2>实验记录需要说明什么</h2>
+<ul><li>哪些模块使用等变结构，哪些保持基线实现。</li><li>训练轮数、数据增强、初始化与学习率策略是否可比。</li><li>训练损失、特征监测与正式验证分别衡量什么。</li><li>检测结果的变化，是否能够在相同评估协议下复现。</li></ul>
+<p>已有交接记录中的训练进度和特征统计属于当时的运行快照，不能当作当前状态或最终检测结论。本文因此以问题、结构和实验设计为主，不据此宣称性能提升。</p>
+<h2>这条研究线的下一步</h2>
+<p>接下来值得继续追问：哪一层最适合引入等变先验？在什么情况下应放松约束？不同模态对旋转结构的敏感性是否一致？这些问题需要通过完整的消融与验证来回答。</p>
+</div></article><div class="article-ending"><span>把做过的事，写成可以分享的经验。</span><a href="../index.html#projects">继续探索项目 ↗</a></div></main><footer class="site-footer wrap"><span>© 2026 刘成魁 · 记录、构建、探索。</span><a href="#">回到顶部 ↑</a></footer></body></html>

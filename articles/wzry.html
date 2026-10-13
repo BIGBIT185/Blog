@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="把游戏画面、结构化状态、动作控制与经验数据连接起来，探索游戏智能体的工程链路。"><meta name="theme-color" content="#f7f7ef"><title>王者荣耀 AI：从画面感知到经验学习 · 刘成魁</title><link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="../style.css"><script src="../main.js" defer></script></head>
+<body><a class="skip-link" href="#article">跳到正文</a><header class="site-header wrap"><a class="brand" href="../index.html" aria-label="刘成魁的博客首页"><span class="brand-mark">ck<span>·</span></span><span>刘成魁<span class="brand-sub">个人博客 / FIELD NOTES</span></span></a><nav aria-label="主导航"><a href="../index.html#notes">文字</a><a href="../index.html#projects">项目</a><a href="../index.html#about">关于</a><button id="theme-toggle" class="theme-toggle" aria-label="切换到深色主题" title="切换主题">◐</button></nav></header>
+<main class="article-shell" id="article"><a class="article-back" href="../index.html#notes">← 返回全部笔记</a><article><header class="article-header"><div class="eyebrow">强化学习 / 团队项目记录</div><h1>王者荣耀 AI：从画面感知到经验学习</h1><p class="article-deck">把游戏画面、结构化状态、动作控制与经验数据连接起来，探索游戏智能体的工程链路。</p><p class="article-provenance">刘成魁 · 依据公开仓库 README 与源码整理。本人为团队成员，本文介绍团队项目，不推断个人分工或对战成绩。</p></header><div class="article-body">
+<div class="article-status"><span>团队项目</span><span>Python · PyTorch · 视觉感知 · DQN 系列</span></div>
+<p><a class="button source-button" href="https://github.com/BIGBIT185/wzry" target="_blank" rel="noopener noreferrer">查看 GitHub 源码 <span>↗</span></a></p>
+<h2>让智能体拥有可用的观察</h2>
+<p>这个王者荣耀 AI 项目以游戏画面为主要观察入口，将视觉识别、状态提取、动作控制和模型训练组织成一条链路。我是团队成员之一；仓库保留了多个阶段的实现。</p>
+<p>观察端不只处理整幅图像，也从界面提取血量、经济、技能冷却和角色位置等状态。源码中可以看到 OCR、OpenCV 模板匹配，以及用于英雄位置识别的 YOLO 相关模块。</p>
+<div class="article-diagram" role="img" aria-label="游戏画面经过感知与状态提取，模型输出动作，交互结果组成经验数据用于训练"><strong>游戏画面</strong><span>→</span><strong>感知与状态</strong><span>→</span><strong>动作输出</strong><span>→</span><strong>经验与训练</strong></div>
+<h2>图像与状态向量共同进入模型</h2>
+<p>离线训练目录中的网络包含时空视觉编码、时序状态编码与跨模态注意力模块。它将画面信息和结构化状态结合起来，再组织左右控制相关的动作输出。训练代码使用 DQN 系列的价值学习结构，并维护经验采样与目标网络。</p>
+<p>这种设计把感知与决策放到同一个工程系统中：状态提取是否稳定、经验是否对应正确的交互时刻，都会影响后续学习。</p>
+<h2>把采集与训练拆开</h2>
+<p>仓库列出了三个演进阶段：采集与训练一体化、通过 Flask 传输经验的分离实现，以及基于文件的离线采集和训练实现。README 将前两个版本标记为停止维护，将离线版本列为主要维护方向。</p>
+<p>离线目录分为 <code>sampler</code> 与 <code>trainer</code>：采集端把经验保存为 <code>.pth</code> 文件，训练端读取这些数据并产出模型与训练日志。这里的“离线”首先描述采集与训练分离、通过文件交接的工程方式，不据此宣称采用了专门的离线强化学习算法。</p>
+<h2>比单个模型更长的工程链路</h2>
+<p>游戏智能体需要将观察、状态、动作、奖励和数据存储衔接起来。项目留下的模块划分，也让这些环节能够分别调试和替换。本文按仓库材料记录实现思路，尚不据此判断对战能力、稳定胜率或泛化表现。</p>
+<p>完整的代码与环境说明见<a class="inline-source" href="https://github.com/BIGBIT185/wzry" target="_blank" rel="noopener noreferrer">项目仓库</a>。源码是理解当前实现的依据，博客中的结构图是对其工程链路的概括。</p>
+</div></article><div class="article-ending"><span>把做过的事，写成可以分享的经验。</span><a href="../index.html#projects">继续探索项目 ↗</a></div></main><footer class="site-footer wrap"><span>© 2026 刘成魁 · 记录、构建、探索。</span><a href="#">回到顶部 ↑</a></footer></body></html>
